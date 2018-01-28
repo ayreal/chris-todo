@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import * as actions from "../actions";
+// import * as actions from "../actions";
 import { Route } from "react-router-dom";
 import Login from "./Login";
 import Lists from "./Lists";
@@ -24,4 +24,5 @@ class Main extends Component {
   }
 }
 
-export default connect(null, actions)(Main);
+export default Main;
+// export default connect(null, actions)(Main);

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from "../actions";
+// import * as actions from "../actions";
 import Header from "../components/Header";
 import Main from "./Main";
 import Footer from "../components/Footer";
+import { Route } from "react-router-dom";
 
 class App extends Component {
   // componentDidMount() {
@@ -21,7 +22,7 @@ class App extends Component {
 
     return (
       <div className="app">
-        <Header loggedIn={this.props.loggedIn} />
+        <Header />
         <Route path="/" component={Main} />
         <Footer />
       </div>
@@ -29,4 +30,11 @@ class App extends Component {
   }
 }
 
-export default connect(mapStateToProps, actions)(App);
+// const mapStateToProps = state => {
+//   return {
+//     loggedIn: !!state.currentUser.id
+//   };
+// };
+
+// export default connect(mapStateToProps, actions)(App);
+export default App;
