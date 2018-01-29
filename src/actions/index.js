@@ -38,26 +38,26 @@ export function fetchProfile(data, history) {
         dispatch({ type: RETURN_ERROR, error: payload.error });
       } else {
         localStorage.setItem("token", payload.token);
-        // dispatch({ type: LOGIN_USER, user: payload.user });
         history.push("/lists");
       }
     });
   };
 }
-//
-// export function fetchCurrentUser() {
-//   return dispatch => {
-//     dispatch({ type: ASYNC_START });
-//     adapter.fetchCurrentUser().then(user => {
-//       dispatch({ type: LOGIN_USER, user: user });
-//     });
-//   };
-// }
-//
-// export const logoutUser = () => {
-//   localStorage.removeItem("token");
-//   return { type: LOGOUT_USER };
-// };
+
+export function fetchCurrentUser() {
+  return dispatch => {
+    adapter.fetchCurrentUser().then(payload => {
+      debugger;
+      dispatch({ type: LOGIN_USER, user: payload.id });
+      dispatch({ type: ADD_ALL_LISTS, lists: payload.lists });
+    });
+  };
+}
+
+export const logoutUser = () => {
+  localStorage.removeItem("token");
+  return { type: LOGOUT_USER };
+};
 
 // Get all lists from API
 

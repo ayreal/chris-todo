@@ -22,10 +22,10 @@ export function loginUser(data) {
 //   }).then(res => res.json());
 // }
 //
-// export function fetchCurrentUser() {
-//   return fetch(`${ROUTE}/current_user`, {
-//     method: "POST",
-//     headers: headers,
-//     body: JSON.stringify({ token: localStorage.token })
-//   }).then(res => res.json());
-// }
+export function fetchCurrentUser() {
+  return fetch(`${ROUTE}/current_user`, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({ token: localStorage.token })
+  }).then(res => res.json());
+}

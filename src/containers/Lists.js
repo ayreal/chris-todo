@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import withAuth from "../hocs/withAuth";
+
 // import * as actions from "../actions";
 
 class Lists extends Component {
@@ -14,5 +16,5 @@ class Lists extends Component {
   }
 }
 
-export default Lists;
+export default withAuth(Lists);
 // export default connect(null, actions)(Lists);
