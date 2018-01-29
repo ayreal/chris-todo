@@ -61,6 +61,15 @@ export const logoutUser = () => {
 // Either the list is from scratch or it begins as a copy of an existing list
 // This is handled on by the API based on which params are present
 
+export function addNewList(name, listIds, userId) {
+  return dispatch => {
+    adapter.addList(name, listIds, userId).then(payload => {
+      debugger;
+      dispatch({ type: ADD_LIST, list: payload });
+    });
+  };
+}
+
 // Update a current list with a new item
 
 // Update a current list with items from an existing list

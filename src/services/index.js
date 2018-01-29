@@ -30,6 +30,14 @@ export function fetchCurrentUser() {
   }).then(res => res.json());
 }
 
+export function addList(name, listIds, userId) {
+  return fetch(`${ROUTE}/lists`, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({ name: name, listIds: listIds, userId: userId })
+  }).then(res => res.json());
+}
+
 export function deleteList(id) {
   return fetch(`${ROUTE}/lists/${id}`, {
     method: "DELETE",

@@ -4,7 +4,6 @@ import withAuth from "../hocs/withAuth";
 import * as actions from "../actions";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
-import ListSelector from "../components/ListSelector";
 import Input, { InputLabel } from "material-ui/Input";
 import { MenuItem } from "material-ui/Menu";
 import { FormControl } from "material-ui/Form";
@@ -64,6 +63,14 @@ class Lists extends Component {
 
   handleDelete = id => {
     this.props.deleteList(id);
+  };
+
+  handleSubmit = () => {
+    this.props.addNewList(
+      this.state.newListName,
+      this.state.templateListIds,
+      this.props.user.id
+    );
   };
 
   renderLists = () => {
@@ -133,6 +140,10 @@ class Lists extends Component {
               ))}
             </Select>
           </FormControl>
+
+          <Button primary onClick={this.handleSubmit}>
+            Create List
+          </Button>
         </form>
 
         <h2>Selected List</h2>
