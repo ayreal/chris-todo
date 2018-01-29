@@ -7,11 +7,7 @@ const currentUserReducer = (state = {}, action) => {
       return { ...state, isFetching: true };
     case "LOGIN_USER":
       console.log("Action.user is", action.user);
-      return {
-        ...action.user
-      };
-    case "RETURN_ERROR":
-      return { ...state, errors: [action.error] };
+      return { ...action.user };
     case "LOGOUT_USER":
       return {};
     default:
@@ -23,16 +19,16 @@ const listReducer = (state = [], action) => {
   switch (action.type) {
     case "ADD_ALL_LISTS":
       console.log("Action.events is", action.events);
-      return [...action.events];
-    case "ADD_LIST":
-      console.log("Action.events is", action.events);
-      return [...action.events];
-    case "UPDATE_LIST":
-      console.log("Action.events is", action.events);
-      return [...action.events];
-    case "REMOVE_LIST":
-      console.log("Action.events is", action.events);
-      return [...action.events];
+      return [...action.lists];
+    // case "ADD_LIST":
+    //   console.log("Action.events is", action.events);
+    //   return [...action.events];
+    // case "UPDATE_LIST":
+    //   console.log("Action.events is", action.events);
+    //   return [...action.events];
+    // case "REMOVE_LIST":
+    //   console.log("Action.events is", action.events);
+    //   return [...action.events];
     default:
       return state;
   }

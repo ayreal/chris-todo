@@ -47,8 +47,7 @@ export function fetchProfile(data, history) {
 export function fetchCurrentUser() {
   return dispatch => {
     adapter.fetchCurrentUser().then(payload => {
-      debugger;
-      dispatch({ type: LOGIN_USER, user: payload.id });
+      dispatch({ type: LOGIN_USER, user: payload.user });
       dispatch({ type: ADD_ALL_LISTS, lists: payload.lists });
     });
   };
