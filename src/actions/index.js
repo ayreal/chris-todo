@@ -11,7 +11,7 @@ import {
   UPDATE_LIST,
   REMOVE_LIST
 } from "./types";
-import * as Adapter from "../services";
+import * as adapter from "../services";
 
 // AUTH
 
@@ -29,21 +29,21 @@ import * as Adapter from "../services";
 //   };
 // }
 //
-// export function fetchProfile(data, history) {
-//   return dispatch => {
-//     dispatch({ type: ASYNC_START });
-//     adapter.loginUser(data).then(payload => {
-//       localStorage.setItem("token", payload.token);
-//       console.log("About to dispatch user, payload is \n", payload);
-//       if (payload.error) {
-//         dispatch({ type: RETURN_ERROR, error: payload.error });
-//       } else {
-//         dispatch({ type: LOGIN_USER, user: payload.user });
-//         history.push("/");
-//       }
-//     });
-//   };
-// }
+export function fetchProfile(data, history) {
+  return dispatch => {
+    dispatch({ type: ASYNC_START });
+    adapter.loginUser(data).then(payload => {
+      if (payload.error) {
+        // handle errors here
+        dispatch({ type: RETURN_ERROR, error: payload.error });
+      } else {
+        localStorage.setItem("token", payload.token);
+        // dispatch({ type: LOGIN_USER, user: payload.user });
+        history.push("/lists");
+      }
+    });
+  };
+}
 //
 // export function fetchCurrentUser() {
 //   return dispatch => {

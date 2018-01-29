@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import MenuItem from "material-ui/Menu/MenuItem";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
-// import * as actions from "../actions";
+import * as actions from "../actions";
 
 class Login extends Component {
   state = {
@@ -13,22 +14,28 @@ class Login extends Component {
     newPassword: "",
     passwordConf: ""
   };
+
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
     });
   };
 
+  handleLogin = e => {
+    e.preventDefault();
+    // debugger;
+    this.props.fetchProfile(this.state, this.props.history);
+  };
+
   render() {
     console.log("%c >> Inside Login \n", "color: #bada55");
-    console.log("STATE: ", this.state);
     // console.log("LOGGED IN: ", this.props.loggedIn);
     // console.log("PROPS: ", this.props);
     console.log("---------------------");
 
     return (
       <div>
-        <form>
+        <form onSubmit={this.handleLogin}>
           <TextField
             id="name"
             label="Name"
@@ -44,7 +51,7 @@ class Login extends Component {
             onChange={this.handleChange("password")}
           />
           <br />
-          <Button raised color="primary">
+          <Button raised color="primary" type="submit">
             Login
           </Button>
         </form>
@@ -61,7 +68,7 @@ class Login extends Component {
             id="newPassword"
             label="Password"
             type="password"
-            value={this.state.password}
+            value={this.state.newPassword}
             onChange={this.handleChange("newPassword")}
           />
           <br />
@@ -82,5 +89,10 @@ class Login extends Component {
   }
 }
 
-// export default connect(null, actions)(Login);
-export default Login;
+const mapStateToProps = state => {
+  return {
+    errors: state.errors
+  };
+};
+
+export default withRouter(connect(mapStateToProps, actions)(Login));
