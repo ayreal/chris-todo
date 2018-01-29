@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import MenuItem from "material-ui/Menu/MenuItem";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
 import * as actions from "../actions";

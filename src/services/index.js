@@ -29,3 +29,11 @@ export function fetchCurrentUser() {
     body: JSON.stringify({ token: localStorage.token })
   }).then(res => res.json());
 }
+
+export function deleteList(id) {
+  return fetch(`${ROUTE}/lists/${id}`, {
+    method: "DELETE",
+    headers: headers,
+    body: id
+  }).then(res => res.json());
+}

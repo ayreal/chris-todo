@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import withAuth from "../hocs/withAuth";
 import * as actions from "../actions";
+import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
 
 // import * as actions from "../actions";
 
 class Lists extends Component {
   state = {
-    selectedList: {}
+    selectedList: {},
+    newListName: "",
+    newListFromId: ""
   };
 
   handleLogout = () => {
@@ -21,9 +24,24 @@ class Lists extends Component {
     });
   };
 
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
+
+  handleDelete = id => {
+    this.props.deleteList(id);
+  };
+
   renderLists = () => {
     return this.props.lists.map(list => (
-      <li onClick={() => this.handleSelect(list)}>{list.name}</li>
+      <li onClick={() => this.handleSelect(list)}>
+        {list.name}{" "}
+        <a href="#" onClick={() => this.handleDelete(list.id)}>
+          Delete?
+        </a>
+      </li>
     ));
   };
 
@@ -54,7 +72,19 @@ class Lists extends Component {
       <div className="lists">
         <h1>This is the lists page</h1>
         <Button onClick={this.handleLogout}>Logout</Button>
+
+        <h2>All Lists</h2>
         <ul>{this.renderLists()}</ul>
+        <form>
+          <TextField
+            id="newListName"
+            label="New List Name"
+            value={this.state.newListName}
+            onChange={this.handleChange("newListName")}
+          />
+          <br />
+          <p>(optional) Add a items from</p>
+        </form>
 
         <h2>Selected List</h2>
         {this.state.selectedList.id

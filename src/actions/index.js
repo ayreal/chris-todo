@@ -68,3 +68,11 @@ export const logoutUser = () => {
 // Remove an item from a list
 
 // Remove a list
+
+export function deleteList(id) {
+  return dispatch => {
+    adapter.deleteList(id).then(payload => {
+      dispatch({ type: REMOVE_LIST, id: id });
+    });
+  };
+}

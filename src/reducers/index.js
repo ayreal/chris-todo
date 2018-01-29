@@ -14,6 +14,13 @@ const currentUserReducer = (state = {}, action) => {
   }
 };
 
+// A toggle
+// return state.map(todo =>
+//   (todo.id === action.id)
+//     ? {...todo, completed: !todo.completed}
+//     : todo
+// )
+
 const listReducer = (state = [], action) => {
   switch (action.type) {
     case "ADD_ALL_LISTS":
@@ -24,9 +31,8 @@ const listReducer = (state = [], action) => {
     // case "UPDATE_LIST":
     //   console.log("Action.events is", action.events);
     //   return [...action.events];
-    // case "REMOVE_LIST":
-    //   console.log("Action.events is", action.events);
-    //   return [...action.events];
+    case "REMOVE_LIST":
+      return [...state.filter(list => list.id !== action.id)];
     default:
       return state;
   }
