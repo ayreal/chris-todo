@@ -28,7 +28,8 @@ class Lists extends Component {
   };
 
   renderItems = () => {
-    debugger;
+    const { selectedList } = this.state;
+    return <ul>{selectedList.items.map(item => <li>{item.name}</li>)}</ul>;
   };
 
   renderSelectedList = () => {
@@ -36,7 +37,7 @@ class Lists extends Component {
     return (
       <div>
         <h3>{selectedList.name}</h3>
-        <ul>{selectedList.items.count > 0 ? this.renderItems() : null}</ul>
+        {selectedList.items.length > 0 ? this.renderItems() : null}
       </div>
     );
   };
