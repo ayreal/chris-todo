@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 // import * as actions from "../actions";
-import { Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Login from "./Login";
 import Lists from "./Lists";
 
@@ -17,8 +17,10 @@ class Main extends Component {
 
     return (
       <div className="main">
-        <Route exact path="/" component={Login} />
-        <Route path="/lists" component={Lists} />
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          <Route path="/" component={Lists} />
+        </Switch>
       </div>
     );
   }
