@@ -64,7 +64,6 @@ export const logoutUser = () => {
 export function addNewList(name, listIds, userId) {
   return dispatch => {
     adapter.addList(name, listIds, userId).then(payload => {
-      debugger;
       dispatch({ type: ADD_LIST, list: payload });
     });
   };

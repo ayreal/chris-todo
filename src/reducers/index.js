@@ -25,9 +25,8 @@ const listReducer = (state = [], action) => {
   switch (action.type) {
     case "ADD_ALL_LISTS":
       return [...action.lists];
-    // case "ADD_LIST":
-    //   console.log("Action.events is", action.events);
-    //   return [...action.events];
+    case "ADD_LIST":
+      return [...state, action.list];
     // case "UPDATE_LIST":
     //   console.log("Action.events is", action.events);
     //   return [...action.events];
