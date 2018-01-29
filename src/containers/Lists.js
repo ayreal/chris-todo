@@ -4,14 +4,42 @@ import withAuth from "../hocs/withAuth";
 import * as actions from "../actions";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
+import ListSelector from "../components/ListSelector";
+import Input, { InputLabel } from "material-ui/Input";
+import { MenuItem } from "material-ui/Menu";
+import { FormControl } from "material-ui/Form";
+import { ListItemText } from "material-ui/List";
+import Select from "material-ui/Select";
 
-// import * as actions from "../actions";
+const names = [
+  "Oliver Hansen",
+  "Van Henry",
+  "April Tucker",
+  "Ralph Hubbard",
+  "Omar Alexander",
+  "Carlos Abbott",
+  "Miriam Wagner",
+  "Bradley Wilkerson",
+  "Virginia Andrews",
+  "Kelly Snyder"
+];
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250
+    }
+  }
+};
 
 class Lists extends Component {
   state = {
     selectedList: {},
     newListName: "",
-    newListFromId: ""
+    templateListIds: []
   };
 
   handleLogout = () => {
@@ -22,6 +50,10 @@ class Lists extends Component {
     this.setState({
       selectedList: list
     });
+  };
+
+  handleTemplateChange = event => {
+    this.setState({ templateListIds: event.target.value });
   };
 
   handleChange = name => event => {
@@ -83,7 +115,24 @@ class Lists extends Component {
             onChange={this.handleChange("newListName")}
           />
           <br />
-          <p>(optional) Add a items from</p>
+          <p>(optional) Add items from</p>
+
+          <FormControl>
+            <InputLabel htmlFor="name-multiple">List</InputLabel>
+            <Select
+              multiple
+              value={this.state.templateListIds}
+              onChange={this.handleTemplateChange}
+              input={<Input id="name-multiple" />}
+              MenuProps={MenuProps}
+            >
+              {this.props.lists.map(list => (
+                <MenuItem key={list.id} value={list.id}>
+                  {list.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </form>
 
         <h2>Selected List</h2>
