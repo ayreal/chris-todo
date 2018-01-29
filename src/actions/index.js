@@ -17,9 +17,6 @@ import * as adapter from "../services";
 
 export function signupUser(data, history) {
   return dispatch => {
-    console.log("inside actions/functions, signupUser");
-    console.log("--------------------------------------");
-
     adapter.signupUser(data).then(payload => {
       console.log("response from signup is: ", payload);
       localStorage.setItem("token", payload.token);

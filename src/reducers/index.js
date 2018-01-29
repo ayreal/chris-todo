@@ -6,7 +6,6 @@ const currentUserReducer = (state = {}, action) => {
     case "ASYNC_START":
       return { ...state, isFetching: true };
     case "LOGIN_USER":
-      console.log("Action.user is", action.user);
       return { ...action.user };
     case "LOGOUT_USER":
       return {};

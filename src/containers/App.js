@@ -9,7 +9,7 @@ import { Route } from "react-router-dom";
 class App extends Component {
   render() {
     console.log("%c >> Inside App \n", "color: #bada55");
-    // console.log("USER ID: ", this.props.userId);
+    console.log("USER ID: ", this.props.currentUser.id);
     console.log("LOGGED IN: ", this.props.loggedIn);
     // console.log("PROPS: ", this.props);
     console.log("---------------------");
@@ -26,7 +26,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    loggedIn: !!state.currentUser.id
+    loggedIn: !!state.currentUser.id,
+    currentUser: state.currentUser
   };
 };
 
