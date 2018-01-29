@@ -15,20 +15,20 @@ import * as adapter from "../services";
 
 // AUTH
 
-// export function signupUser(data, history) {
-//   return dispatch => {
-//     console.log("inside actions/functions, signupUser");
-//     console.log("--------------------------------------");
-//
-//     adapter.signupUser(data).then(payload => {
-//       console.log("response from signup is: ", payload);
-//       localStorage.setItem("token", payload.token);
-//       dispatch({ type: LOGIN_USER, user: payload.user });
-//       history.push("/");
-//     });
-//   };
-// }
-//
+export function signupUser(data, history) {
+  return dispatch => {
+    console.log("inside actions/functions, signupUser");
+    console.log("--------------------------------------");
+
+    adapter.signupUser(data).then(payload => {
+      console.log("response from signup is: ", payload);
+      localStorage.setItem("token", payload.token);
+      dispatch({ type: LOGIN_USER, user: payload.user });
+      history.push("/lists");
+    });
+  };
+}
+
 export function fetchProfile(data, history) {
   return dispatch => {
     dispatch({ type: ASYNC_START });

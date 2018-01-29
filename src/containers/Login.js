@@ -23,16 +23,15 @@ class Login extends Component {
 
   handleLogin = e => {
     e.preventDefault();
-    // debugger;
     this.props.fetchProfile(this.state, this.props.history);
   };
 
-  render() {
-    console.log("%c >> Inside Login \n", "color: #bada55");
-    // console.log("LOGGED IN: ", this.props.loggedIn);
-    // console.log("PROPS: ", this.props);
-    console.log("---------------------");
+  handleSignup = e => {
+    e.preventDefault();
+    this.props.signupUser(this.state, this.props.history);
+  };
 
+  render() {
     return (
       <div>
         <form onSubmit={this.handleLogin}>
@@ -56,7 +55,7 @@ class Login extends Component {
           </Button>
         </form>
 
-        <form>
+        <form onSubmit={this.handleSignup}>
           <TextField
             id="newName"
             label="Name"
@@ -80,7 +79,7 @@ class Login extends Component {
             onChange={this.handleChange("passwordConf")}
           />
           <br />
-          <Button raised color="primary">
+          <Button type="submit" raised color="primary">
             Signup
           </Button>
         </form>
