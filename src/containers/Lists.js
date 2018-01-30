@@ -70,7 +70,11 @@ class Lists extends Component {
 
   renderItems = () => {
     const { selectedList } = this.state;
-    return <ul>{selectedList.items.map(item => <li>{item.name}</li>)}</ul>;
+    return (
+      <ul>
+        {selectedList.items.map(item => <li key={item.id}>{item.name}</li>)}
+      </ul>
+    );
   };
 
   renderSelectedList = () => {
