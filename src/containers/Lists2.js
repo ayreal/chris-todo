@@ -104,7 +104,7 @@ const styles = theme => ({
 
 class Lists2 extends React.Component {
   state = {
-    open: false
+    open: true
   };
 
   handleDrawerOpen = () => {
