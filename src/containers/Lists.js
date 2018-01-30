@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 import withAuth from "../hocs/withAuth";
 import * as actions from "../actions";
 import Grid from "material-ui/Grid";
-import Typography from "material-ui/Typography";
-import Paper from "material-ui/Paper";
-import Button from "material-ui/Button";
+import Introduction from "../components/Introduction";
 import ListOptions from "../components/ListOptions";
 import NewListForm from "../components/NewListForm";
+import FeaturedList from "../components/FeaturedList";
 
 class Lists extends Component {
   state = {
@@ -39,42 +38,14 @@ class Lists extends Component {
     debugger;
   };
 
-  renderItems = () => {
-    const { selectedList } = this.state;
-    return (
-      <ul>
-        {selectedList.items.map(item => <li key={item.id}>{item.name}</li>)}
-      </ul>
-    );
-  };
-
-  renderSelectedList = () => {
-    const { selectedList } = this.state;
-    return (
-      <div>
-        <h3>{selectedList.name}</h3>
-        {selectedList.items.length > 0 ? this.renderItems() : null}
-      </div>
-    );
-  };
-
   render() {
     console.log("%c >> Inside Lists \n", "color: #bada55");
-    // console.log("USER ID: ", this.props.userId);
-    // console.log("LOGGED IN: ", this.props.loggedIn);
-    console.log("PROPS: ", this.props);
-    console.log("STATE: ", this.state);
     console.log("---------------------");
 
     return (
       <Grid container spacing={8}>
         <Grid item xs={12}>
-          <Paper>
-            <Typography type="display2" gutterBottom>
-              This is the lists page
-            </Typography>
-            <Button onClick={this.handleLogout}>Logout</Button>
-          </Paper>
+          <Introduction handleLogout={this.handleLogout} />
         </Grid>
 
         <Grid container spacing={8}>
@@ -94,12 +65,7 @@ class Lists extends Component {
           </Grid>
 
           <Grid item xs={12} sm={9}>
-            <Paper>
-              <h2>Selected List</h2>
-              {this.state.selectedList.id
-                ? this.renderSelectedList()
-                : "No list selected"}
-            </Paper>
+            <FeaturedList selectedList={this.state.selectedList} />
           </Grid>
         </Grid>
       </Grid>
