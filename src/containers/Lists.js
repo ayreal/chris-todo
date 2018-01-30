@@ -2,12 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import withAuth from "../hocs/withAuth";
 import * as actions from "../actions";
+import Grid from "material-ui/Grid";
+import Typography from "material-ui/Typography";
+import Paper from "material-ui/Paper";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
 import Input, { InputLabel } from "material-ui/Input";
 import { MenuItem } from "material-ui/Menu";
 import { FormControl } from "material-ui/Form";
 import Select from "material-ui/Select";
+import ListOptions from "../components/ListOptions";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -76,15 +80,6 @@ class Lists extends Component {
     debugger;
   };
 
-  renderLists = () => {
-    return this.props.lists.map(list => (
-      <li key={list.id} onClick={() => this.handleSelect(list)}>
-        {list.name}{" "}
-        <Button onClick={() => this.handleDelete(list.id)}>Delete</Button>
-      </li>
-    ));
-  };
-
   renderItems = () => {
     const { selectedList } = this.state;
     return (
@@ -113,47 +108,65 @@ class Lists extends Component {
     console.log("---------------------");
 
     return (
-      <div className="lists">
-        <h1>This is the lists page</h1>
-        <Button onClick={this.handleLogout}>Logout</Button>
+      <Grid container spacing={8}>
+        <Grid item xs={12}>
+          <Paper>
+            <Typography type="display2" gutterBottom>
+              This is the lists page
+            </Typography>
+            <Button onClick={this.handleLogout}>Logout</Button>
+          </Paper>
+        </Grid>
 
-        <h2>All Lists</h2>
-        <ul>{this.renderLists()}</ul>
-        <form>
-          <TextField
-            id="newListName"
-            label="New List Name"
-            value={this.state.newListName}
-            onChange={this.handleChange("newListName")}
-          />
-          <br />
-          <p>(optional) Add items from</p>
+        <Grid container spacing={8}>
+          <Grid item xs={12} sm={3}>
+            <ListOptions
+              lists={this.props.lists}
+              handleSelect={this.handleSelect}
+              handleDelete={this.handleDelete}
+            />
 
-          <FormControl>
-            <InputLabel htmlFor="name-multiple">List</InputLabel>
-            <Select
-              multiple
-              value={this.state.templateListIds}
-              onChange={this.handleTemplateChange}
-              input={<Input id="name-multiple" />}
-              MenuProps={MenuProps}
-            >
-              {this.props.lists.map(list => (
-                <MenuItem key={list.id} value={list.id}>
-                  {list.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+            <Paper>
+              <TextField
+                id="newListName"
+                label="New List Name"
+                value={this.state.newListName}
+                onChange={this.handleChange("newListName")}
+              />
+              <br />
+              <p>(optional) Add items from</p>
 
-          <Button onClick={this.handleSubmit}>Create List</Button>
-        </form>
+              <FormControl>
+                <InputLabel htmlFor="name-multiple">List</InputLabel>
+                <Select
+                  multiple
+                  value={this.state.templateListIds}
+                  onChange={this.handleTemplateChange}
+                  input={<Input id="name-multiple" />}
+                  MenuProps={MenuProps}
+                >
+                  {this.props.lists.map(list => (
+                    <MenuItem key={list.id} value={list.id}>
+                      {list.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
 
-        <h2>Selected List</h2>
-        {this.state.selectedList.id
-          ? this.renderSelectedList()
-          : "No list selected"}
-      </div>
+              <Button onClick={this.handleSubmit}>Create List</Button>
+            </Paper>
+          </Grid>
+
+          <Grid item xs={12} sm={9}>
+            <Paper>
+              <h2>Selected List</h2>
+              {this.state.selectedList.id
+                ? this.renderSelectedList()
+                : "No list selected"}
+            </Paper>
+          </Grid>
+        </Grid>
+      </Grid>
     );
   }
 }
