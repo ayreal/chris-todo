@@ -34,8 +34,9 @@ class Lists extends Component {
     this.handleClearSelected();
   };
 
-  handleAddItem = () => {
+  handleAddItem = name => {
     debugger;
+    this.props.addItem(name, this.state.selectedList.id, this.props.user.id);
   };
 
   render() {
@@ -65,7 +66,10 @@ class Lists extends Component {
           </Grid>
 
           <Grid item xs={12} sm={9}>
-            <FeaturedList selectedList={this.state.selectedList} />
+            <FeaturedList
+              list={this.state.selectedList}
+              handleAddItem={this.handleAddItem}
+            />
           </Grid>
         </Grid>
       </Grid>

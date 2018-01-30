@@ -38,6 +38,14 @@ export function addList(name, listIds, userId) {
   }).then(res => res.json());
 }
 
+export function addItem(name, itemIds, userId) {
+  return fetch(`${ROUTE}/items`, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({ name: name, itemIds: itemIds, userId: userId })
+  }).then(res => res.json());
+}
+
 export function deleteList(id) {
   return fetch(`${ROUTE}/lists/${id}`, {
     method: "DELETE",
