@@ -27,6 +27,14 @@ class Lists extends Component {
     templateListIds: []
   };
 
+  clearNewListForm = () => {
+    this.setState({
+      selectedList: {},
+      newListName: "",
+      templateListIds: []
+    });
+  };
+
   handleLogout = () => {
     this.props.logoutUser();
   };
@@ -49,14 +57,23 @@ class Lists extends Component {
 
   handleDelete = id => {
     this.props.deleteList(id);
+    this.setState({
+      selectedList: {}
+    });
   };
 
-  handleSubmit = () => {
+  handleSubmit = e => {
+    e.preventDefault();
     this.props.addNewList(
       this.state.newListName,
       this.state.templateListIds,
       this.props.user.id
     );
+    this.clearNewListForm();
+  };
+
+  handleAddItem = () => {
+    debugger;
   };
 
   renderLists = () => {

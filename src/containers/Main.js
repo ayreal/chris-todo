@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import Login from "./Login";
-import Lists from "./Lists";
+import Lists2 from "./Lists2";
 
 class Main extends Component {
   render() {
@@ -12,7 +12,7 @@ class Main extends Component {
       <div className="main">
         <Switch>
           <Route exact path="/login" component={Login} />
-          <Route path="/" component={Lists} />
+          <Route path="/" component={Lists2} />
         </Switch>
       </div>
     );
