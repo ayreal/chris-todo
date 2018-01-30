@@ -7,21 +7,7 @@ import Button from "material-ui/Button";
 import Input, { InputLabel } from "material-ui/Input";
 import { MenuItem } from "material-ui/Menu";
 import { FormControl } from "material-ui/Form";
-import { ListItemText } from "material-ui/List";
 import Select from "material-ui/Select";
-
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder"
-];
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -75,11 +61,9 @@ class Lists extends Component {
 
   renderLists = () => {
     return this.props.lists.map(list => (
-      <li onClick={() => this.handleSelect(list)}>
+      <li key={list.id} onClick={() => this.handleSelect(list)}>
         {list.name}{" "}
-        <a href="#" onClick={() => this.handleDelete(list.id)}>
-          Delete?
-        </a>
+        <Button onClick={() => this.handleDelete(list.id)}>Delete</Button>
       </li>
     ));
   };
@@ -141,9 +125,7 @@ class Lists extends Component {
             </Select>
           </FormControl>
 
-          <Button primary onClick={this.handleSubmit}>
-            Create List
-          </Button>
+          <Button onClick={this.handleSubmit}>Create List</Button>
         </form>
 
         <h2>Selected List</h2>

@@ -41,6 +41,7 @@ export function fetchProfile(data, history) {
   };
 }
 
+// also adds all the user's lists to the store
 export function fetchCurrentUser() {
   return dispatch => {
     adapter.fetchCurrentUser().then(payload => {
@@ -55,10 +56,8 @@ export const logoutUser = () => {
   return { type: LOGOUT_USER };
 };
 
-// Get all lists from API
-
 // Create a new list
-// Either the list is from scratch or it begins as a copy of an existing list
+// Either the list is from scratch or it begins as a copy of existing list(s)
 // This is handled on by the API based on which params are present
 
 export function addNewList(name, listIds, userId) {
