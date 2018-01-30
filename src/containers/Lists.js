@@ -5,42 +5,19 @@ import * as actions from "../actions";
 import Grid from "material-ui/Grid";
 import Typography from "material-ui/Typography";
 import Paper from "material-ui/Paper";
-import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
-import Input, { InputLabel } from "material-ui/Input";
-import { MenuItem } from "material-ui/Menu";
-import { FormControl } from "material-ui/Form";
-import Select from "material-ui/Select";
 import ListOptions from "../components/ListOptions";
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250
-    }
-  }
-};
+import NewListForm from "../components/NewListForm";
 
 class Lists extends Component {
   state = {
-    selectedList: {},
-    newListName: "",
-    templateListIds: []
+    selectedList: {}
   };
 
-  clearNewListForm = () => {
+  handleClearSelected = () => {
     this.setState({
-      selectedList: {},
-      newListName: "",
-      templateListIds: []
+      selectedList: {}
     });
-  };
-
-  handleLogout = () => {
-    this.props.logoutUser();
   };
 
   handleSelect = list => {
@@ -49,31 +26,13 @@ class Lists extends Component {
     });
   };
 
-  handleTemplateChange = event => {
-    this.setState({ templateListIds: event.target.value });
-  };
-
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
+  handleLogout = () => {
+    this.props.logoutUser();
   };
 
   handleDelete = id => {
     this.props.deleteList(id);
-    this.setState({
-      selectedList: {}
-    });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.addNewList(
-      this.state.newListName,
-      this.state.templateListIds,
-      this.props.user.id
-    );
-    this.clearNewListForm();
+    this.handleClearSelected();
   };
 
   handleAddItem = () => {
@@ -126,35 +85,12 @@ class Lists extends Component {
               handleDelete={this.handleDelete}
             />
 
-            <Paper>
-              <TextField
-                id="newListName"
-                label="New List Name"
-                value={this.state.newListName}
-                onChange={this.handleChange("newListName")}
-              />
-              <br />
-              <p>(optional) Add items from</p>
-
-              <FormControl>
-                <InputLabel htmlFor="name-multiple">List</InputLabel>
-                <Select
-                  multiple
-                  value={this.state.templateListIds}
-                  onChange={this.handleTemplateChange}
-                  input={<Input id="name-multiple" />}
-                  MenuProps={MenuProps}
-                >
-                  {this.props.lists.map(list => (
-                    <MenuItem key={list.id} value={list.id}>
-                      {list.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-
-              <Button onClick={this.handleSubmit}>Create List</Button>
-            </Paper>
+            <NewListForm
+              lists={this.props.lists}
+              addNewList={this.props.addNewList}
+              handleClearSelected={this.handleClearSelected}
+              user={this.props.user}
+            />
           </Grid>
 
           <Grid item xs={12} sm={9}>
