@@ -2,19 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import classNames from "classnames";
-import Drawer from "material-ui/Drawer";
+import Sidebar from "../components/Sidebar";
 import AppBar from "material-ui/AppBar";
 import Toolbar from "material-ui/Toolbar";
-import List from "material-ui/List";
 import { MenuItem } from "material-ui/Menu";
 import Typography from "material-ui/Typography";
 import TextField from "material-ui/TextField";
-import Divider from "material-ui/Divider";
 import IconButton from "material-ui/IconButton";
 import MenuIcon from "material-ui-icons/Menu";
-import ChevronLeftIcon from "material-ui-icons/ChevronLeft";
-import ChevronRightIcon from "material-ui-icons/ChevronRight";
-import { mailFolderListItems, otherMailFolderListItems } from "./tileData";
 
 const drawerWidth = 240;
 
@@ -123,34 +118,6 @@ class Lists2 extends React.Component {
   render() {
     const { classes, theme } = this.props;
     const { open } = this.state;
-    const drawer = (
-      <Drawer
-        type="persistent"
-        classes={{
-          paper: classes.drawerPaper
-        }}
-        anchor="left"
-        open={open}
-      >
-        <div className={classes.drawerInner}>
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === "rtl" ? (
-                <ChevronRightIcon />
-              ) : (
-                <ChevronLeftIcon />
-              )}
-            </IconButton>
-          </div>
-          <Divider />
-          <List className={classes.list}>{mailFolderListItems}</List>
-          <Divider />
-          <List className={classes.list}>{otherMailFolderListItems}</List>
-        </div>
-      </Drawer>
-    );
-
-    let before = drawer;
 
     return (
       <div className={classes.root}>
@@ -175,7 +142,14 @@ class Lists2 extends React.Component {
               </Typography>
             </Toolbar>
           </AppBar>
-          {before}
+
+          <Sidebar
+            classes={this.props.classes}
+            theme={this.props.theme}
+            open={this.state.open}
+            handleDrawerClose={this.handleDrawerClose}
+          />
+
           <main
             className={classNames(classes.content, classes[`content-left`], {
               [classes.contentShift]: open,
