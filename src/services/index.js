@@ -38,11 +38,11 @@ export function addList(name, listIds, userId) {
   }).then(res => res.json());
 }
 
-export function addItem(name, itemIds, userId) {
+export function addItem(name, listId) {
   return fetch(`${ROUTE}/items`, {
     method: "POST",
     headers: headers,
-    body: JSON.stringify({ name: name, itemIds: itemIds, userId: userId })
+    body: JSON.stringify({ name: name, listId: listId })
   }).then(res => res.json());
 }
 

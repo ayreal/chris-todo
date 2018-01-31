@@ -35,8 +35,8 @@ class Lists extends Component {
   };
 
   handleAddItem = name => {
-    debugger;
-    this.props.addItem(name, this.state.selectedList.id, this.props.user.id);
+    // debugger;
+    this.props.addItem(name, this.state.selectedList.id);
   };
 
   render() {

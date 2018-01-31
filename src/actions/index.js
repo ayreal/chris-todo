@@ -70,10 +70,9 @@ export function addNewList(name, listIds, userId) {
 
 // Update a current list with a new item
 
-export function addItem(name, listIds, userId) {
-  debugger;
+export function addItem(name, listId) {
   return dispatch => {
-    adapter.addItem(name, listIds, userId).then(payload => {
+    adapter.addItem(name, listId).then(payload => {
       debugger;
       dispatch({ type: ADD_LIST, list: payload });
     });

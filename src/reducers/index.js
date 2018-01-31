@@ -21,15 +21,24 @@ const currentUserReducer = (state = {}, action) => {
 //     : todo
 // )
 
+// const updatedItems = state.map(item => {
+//   if(item.id === action.id){
+//     return { ...item, ...action.payload }
+//   }
+//   return item
+// })
+// return updatedItems
+
 const listReducer = (state = [], action) => {
   switch (action.type) {
     case "ADD_ALL_LISTS":
       return [...action.lists];
     case "ADD_LIST":
       return [...state, action.list];
-    // case "UPDATE_LIST":
-    //   console.log("Action.events is", action.events);
-    //   return [...action.events];
+    case "UPDATE_LIST":
+      return state.map(
+        list => (list.id === action.list.id ? action.list : list)
+      );
     case "REMOVE_LIST":
       return [...state.filter(list => list.id !== action.id)];
     default:
