@@ -27,6 +27,7 @@ class FeaturedList extends Component {
       <div>
         <h3>{list.name}</h3>
         {list.items.length > 0 ? this.renderItems() : null}
+        {this.renderForm()}
       </div>
     );
   };
@@ -34,8 +35,13 @@ class FeaturedList extends Component {
   renderItems = () => {
     const { list } = this.props;
     return (
+      <ul>{list.items.map(item => <li key={item.id}>{item.name}</li>)}</ul>
+    );
+  };
+
+  renderForm = () => {
+    return (
       <div>
-        <ul>{list.items.map(item => <li key={item.id}>{item.name}</li>)}</ul>
         <TextField
           id="newItem"
           label="Add Item"

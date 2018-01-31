@@ -73,8 +73,8 @@ export function addNewList(name, listIds, userId) {
 export function addItem(name, listId) {
   return dispatch => {
     adapter.addItem(name, listId).then(payload => {
-      debugger;
-      dispatch({ type: ADD_LIST, list: payload });
+      // debugger;
+      dispatch({ type: UPDATE_LIST, list: payload });
     });
   };
 }

@@ -37,7 +37,10 @@ const listReducer = (state = [], action) => {
       return [...state, action.list];
     case "UPDATE_LIST":
       return state.map(
-        list => (list.id === action.list.id ? action.list : list)
+        list =>
+          list.id === action.list.id
+            ? { ...list, items: action.list.items }
+            : list
       );
     case "REMOVE_LIST":
       return [...state.filter(list => list.id !== action.id)];
