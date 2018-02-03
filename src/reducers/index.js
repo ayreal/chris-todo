@@ -29,6 +29,43 @@ const currentUserReducer = (state = {}, action) => {
 // })
 // return updatedItems
 
+// OLD reducer before refactoring for reference
+
+// const listReducer = (state = [], action) => {
+//   switch (action.type) {
+//     case "ADD_ALL_LISTS":
+//       return [...action.lists];
+//     case "ADD_LIST":
+//       return [...state, action.list];
+//     case "UPDATE_LIST":
+//       return state.map(
+//         list =>
+//           list.id === action.listId
+//             ? { ...list, items: [...list.items, action.item] }
+//             : list
+//       );
+//     case "REMOVE_LIST":
+//       return [...state.filter(list => list.id !== action.id)];
+//     default:
+//       return state;
+//   }
+// };
+
+// function insertItem(array, action) {
+//     return [
+//         ...array.slice(0, action.index),
+//         action.item,
+//         ...array.slice(action.index)
+//     ]
+// }
+//
+// function removeItem(array, action) {
+//     return [
+//         ...array.slice(0, action.index),
+//         ...array.slice(action.index + 1)
+//     ];
+// }
+
 const listReducer = (state = [], action) => {
   switch (action.type) {
     case "ADD_ALL_LISTS":
@@ -36,14 +73,19 @@ const listReducer = (state = [], action) => {
     case "ADD_LIST":
       return [...state, action.list];
     case "UPDATE_LIST":
-      return state.map(
-        list =>
-          list.id === action.list.id
-            ? { ...list, items: action.list.items }
-            : list
-      );
+      console.log("UPDATE LIST, action is: ", action);
+      return state.map(list => {
+        if (list.id !== action.payload.listId) {
+          return list;
+        }
+
+        return {
+          ...list,
+          items: [...list.items, action.payload.item]
+        };
+      });
     case "REMOVE_LIST":
-      return [...state.filter(list => list.id !== action.id)];
+      return state.filter(list => list.id !== action.id);
     default:
       return state;
   }

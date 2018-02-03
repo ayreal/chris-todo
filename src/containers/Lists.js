@@ -42,6 +42,7 @@ class Lists extends Component {
   render() {
     console.log("%c >> Inside Lists \n", "color: #bada55");
     console.log("SELECTED ID is", this.state.selectedList.id);
+    console.log("LISTS is", this.props.lists);
     console.log("---------------------");
 
     return (

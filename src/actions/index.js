@@ -74,7 +74,7 @@ export function addItem(name, listId) {
   return dispatch => {
     adapter.addItem(name, listId).then(payload => {
       // debugger;
-      dispatch({ type: UPDATE_LIST, list: payload });
+      dispatch({ type: UPDATE_LIST, payload: payload });
     });
   };
 }

@@ -34,6 +34,7 @@ class FeaturedList extends Component {
 
   renderItems = () => {
     const { list } = this.props;
+    console.log("executing renderItems, list is: ", list);
     return (
       <ul>{list.items.map(item => <li key={item.id}>{item.name}</li>)}</ul>
     );
@@ -56,6 +57,8 @@ class FeaturedList extends Component {
   };
 
   render() {
+    console.log("%c >> Inside FeaturedLists \n", "color: #bada55");
+    console.log("---------------------");
     return (
       <Paper>
         <h2>Selected List</h2>
